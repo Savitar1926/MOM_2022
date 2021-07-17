@@ -75,7 +75,6 @@ export default {
         this.error = false;
         this.errorMsg = "";
         const firebaseAuth = await firebase.auth();
-
         const createUser = await firebaseAuth.createUserWithEmailAndPassword(
           this.email,
           this.password
@@ -91,6 +90,7 @@ export default {
         });
 
         this.$router.push({ name: "Home" });
+        console.log(this.email);
         return;
       }
       this.error = true;

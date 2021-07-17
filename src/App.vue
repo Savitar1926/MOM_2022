@@ -1,7 +1,7 @@
 <template>
   <div class="app-wrapper">
     <transition name="view" appear>
-      <div class="app">
+      <div id="app">
         <Navigation v-if="!navigation" />
         <router-view />
         <Footer v-if="!navigation" />
@@ -29,6 +29,7 @@ export default {
   },
   mounted() {
     this.pageLoad = true;
+    console.log(firebase.auth().currentUser);
   },
   methods: {
     checkRoute() {
@@ -59,7 +60,7 @@ export default {
   box-sizing: border-box;
   font-family: "Quicksand", sans-serif;
 }
-.app {
+#app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
