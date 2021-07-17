@@ -1,10 +1,12 @@
 <template>
   <div class="app-wrapper">
-    <div class="app">
-      <Navigation v-if="!navigation" />
-      <router-view />
-      <Footer v-if="!navigation" />
-    </div>
+    <transition name="view" appear>
+      <div class="app">
+        <Navigation v-if="!navigation" />
+        <router-view />
+        <Footer v-if="!navigation" />
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -19,12 +21,15 @@ export default {
   data() {
     return {
       navigation: null,
+      pageLoad: false,
     };
   },
   created() {
     this.checkRoute();
   },
-  mounted() {},
+  mounted() {
+    this.pageLoad = true;
+  },
   methods: {
     checkRoute() {
       if (
@@ -58,6 +63,24 @@ export default {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
+.view-leave-active {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+}
+
+.view-enter-active {
+  transition: opacity 1s ease-in-out, transform 0.5s ease;
+  transition-delay: 0.5s;
+}
+
+.view-enter,
+.view-leave-to {
+  opacity: 0;
+}
+
+.view-enter-to,
+.view-leave {
+  opacity: 1;
 }
 .container {
   max-width: 1440px;
