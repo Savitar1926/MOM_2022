@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <p>Hello Good Morning Doctor <strong style="font-size: 32px;">{{ this.$store.state.profileFirstName }} {{ this.$store.state.profileLastName }}</strong></p>
     <BlogPost :post="welcomeScreen" />
     <BlogPost
       v-for="(post, index) in sampleBlogPost"
