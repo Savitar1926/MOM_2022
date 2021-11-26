@@ -25,11 +25,17 @@ export default {
     };
   },
   created() {
+	    firebase.auth().onAuthStateChanged((user) => {
+      this.$store.commit("updateUser", user);
+      if (user) {
+        this.$store.dispatch("getCurrentUser", user);
+      }
+    });
     this.checkRoute();
   },
   mounted() {
     this.pageLoad = true;
-    console.log(firebase.auth().currentUser);
+   console.log(firebase.auth().currentUser);
   },
   methods: {
     checkRoute() {
