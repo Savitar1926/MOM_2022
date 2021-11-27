@@ -1,6 +1,13 @@
 <template>
   <div class="home">
-    <p>Hello Good Morning Doctor <strong style="font-size: 32px;">{{ this.$store.state.profileFirstName }} {{ this.$store.state.profileLastName }}</strong></p>
+    <h1>{{ this.time }}</h1>
+    <p>
+      Hello Good Morning Doctor
+      <strong style="font-size: 32px;">
+        {{ this.$store.state.profileFirstName }}
+        {{ this.$store.state.profileLastName }}
+      </strong>
+    </p>
     <BlogPost :post="welcomeScreen" />
     <BlogPost
       v-for="(post, index) in sampleBlogPost"
@@ -23,7 +30,8 @@
       <div class="container">
         <h2>never miss a post. Register for your free account today!</h2>
         <router-link class="router-button" to="#">
-          Register for FireBlogs <Arrow class="arrow arrow-light" />
+          Register for FireBlogs
+          <Arrow class="arrow arrow-light" />
         </router-link>
       </div>
     </div>
@@ -32,11 +40,11 @@
 
 <script>
 // @ is an alias to /src
-import BlogPost from "@/components/BlogPost.vue";
-import BlogCard from "@/components/BlogCard.vue";
-import Arrow from "../assets/Icons/arrow-right-light.svg";
+import BlogPost from '@/components/BlogPost.vue'
+import BlogCard from '@/components/BlogCard.vue'
+import Arrow from '../assets/Icons/arrow-right-light.svg'
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
     BlogPost,
     BlogCard,
@@ -45,35 +53,52 @@ export default {
   data() {
     return {
       welcomeScreen: {
-        title: "Welcome!",
+        title: 'Welcome!',
         blogPost:
-          "Aliquip magna eiusmod ulquip magna eiusmod ulamco eu occaecat aute aliquip.",
+          'Aliquip magna eiusmod ulquip magna eiusmod ulamco eu occaecat aute aliquip.',
         welcomeScreen: true,
-        photo: "coding",
+        photo: 'coding',
       },
       sampleBlogPost: [
         {
-          title: "This is a Filler Title",
+          title: 'This is a Filler Title',
           blogHTML:
-            "Duis minim in aute eu ut ullamco culpa proident minim cupidatat.",
-          blogCoverPhoto: "beautiful-stories",
+            'Duis minim in aute eu ut ullamco culpa proident minim cupidatat.',
+          blogCoverPhoto: 'beautiful-stories',
         },
         {
-          title: "This is a Filler Title",
+          title: 'This is a Filler Title',
           blogHTML:
-            "Duis minim in aute eu ut ullamco culpa proident minim cupidatat.",
-          blogCoverPhoto: "designed-for-everyone",
+            'Duis minim in aute eu ut ullamco culpa proident minim cupidatat.',
+          blogCoverPhoto: 'designed-for-everyone',
         },
       ],
-    };
+      interval: null,
+      time: null
+    }
   },
-
+    beforeDestroy() {
+    // prevent memory leak
+    clearInterval(this.interval)
+  },
+  created() {
+    // update the time every second
+    this.interval = setInterval(() => {
+      // Concise way to format time according to system locale.
+      // In my case this returns "3:48:00 am"
+      this.time = Intl.DateTimeFormat(navigator.language, {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric'
+      }).format()
+    }, 1000)
+  },
   computed: {
     sampleBlogCards() {
-      return this.$store.state.sampleBlogCards;
+      return this.$store.state.sampleBlogCards
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
