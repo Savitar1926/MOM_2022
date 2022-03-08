@@ -137,6 +137,7 @@ export default {
     },
     signOut() {
       firebase.auth().signOut();
+      this.$router.push("/");
       window.location.reload();
     },
   },
