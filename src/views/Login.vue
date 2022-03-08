@@ -7,7 +7,7 @@
           >Register</router-link
         >
       </p>
-      <h2>Login to FireBlogs</h2>
+      <h2>Login to Mom</h2>
       <div class="inputs">
         <div class="input">
           <input type="text" placeholder="Email" v-model="email" />
@@ -25,7 +25,17 @@
       <button @click.prevent="signIn">Sign In</button>
       <div class="angle"></div>
     </form>
-    <div class="background"></div>
+    <div class="background" style="overflow: hidden">
+      <lottie-player
+        v-show="!this.login"
+        autoplay
+        loop
+        mode="normal"
+        src="https://assets3.lottiefiles.com/packages/lf20_nevctvni.json"
+        style="transform: scale(1.5)"
+      >
+      </lottie-player>
+    </div>
   </div>
 </template>
 
@@ -34,6 +44,7 @@ import email from "../assets/Icons/envelope-regular.svg";
 import password from "../assets/Icons/lock-alt-solid.svg";
 import firebase from "firebase/app";
 import "firebase/auth";
+import "@lottiefiles/lottie-player";
 
 export default {
   name: "login",
@@ -163,7 +174,8 @@ export default {
     display: none;
     flex: 2;
     background-size: cover;
-    background-image: url("../assets/background.png");
+    // background-image: url("../assets/background.png");
+    overflow: none;
     width: 100%;
     height: 100%;
     @media (min-width: 900px) {

@@ -1,16 +1,33 @@
 <template>
-  <div class="blog-card-wrap">
-    <div class="blog-cards container">
-      <div class="toggle-edit">
-        <span>Toggle Editing Post</span>
-        <input type="checkbox" v-model="editPost" />
-      </div>
-      <BlogCard
-        :post="post"
-        v-for="(post, index) in sampleBlogCards"
-        :key="index"
-      />
-    </div>
+  <div
+    style="
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+    "
+  >
+    <lottie-player
+      autoplay
+      loop
+      mode="normal"
+      src="https://assets9.lottiefiles.com/private_files/lf30_kqrbw5zc.json"
+      style="width: 320px"
+    >
+    </lottie-player>
+
+    <span
+      style="font-weight: bold; color: rgb(200, 204, 221; font-size: 32px; text-align: center"
+    >
+      Hi Daryl here again, <br />
+      sadly haven't done this part yet
+    </span>
+    <span style=" color: rgb(200, 204, 221; text-align: center">
+      If there's anything that you think that you can contribute on this part
+      <br />
+      I'd be glad to take all your inputs.
+    </span>
   </div>
 </template>
 

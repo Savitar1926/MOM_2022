@@ -17,7 +17,7 @@ const routes = [{
         }
     },
     {
-        path: '/blogs',
+        path: '/patients',
         name: 'Blogs',
         component: Blogs,
         meta: {
@@ -47,7 +47,22 @@ const routes = [{
         meta: {
             title: 'Forgot Password'
         }
-    }
+    },
+    {
+    path: '/add',
+    name: 'add',
+    component: () => import('../components/NoteCreate')
+  },
+  {
+    path: '/list',
+    name: 'list',
+    component: () => import('../components/NoteList')
+  },
+  {
+    path: '/edit/:id',
+    name: 'edit',
+    component: () => import('../components/NoteEdit')
+  }
 ]
 
 const router = new VueRouter({

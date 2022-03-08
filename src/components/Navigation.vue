@@ -2,26 +2,53 @@
   <header>
     <nav class="container">
       <div class="branding">
-        <router-link class="header" :to="{ name: 'Home' }"
-          >Mom</router-link
-        >
+        <router-link class="header" :to="{ name: 'Home' }">Mom</router-link>
       </div>
       <div class="nav-links">
         <ul v-show="!mobile">
-          <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
-          <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
-          <router-link class="link" to="#">Create Post</router-link>
+          <router-link class="link" :to="{ name: 'Home' }" v-if="user"
+            >Home</router-link
+          >
+          <router-link class="link" :to="{ name: 'Blogs' }" v-if="user"
+            >Patients</router-link
+          >
           <router-link v-if="!user" class="link" :to="{ name: 'Login' }"
             >Login/Register</router-link
           >
+          <div
+            class="note"
+            v-if="user"
+            @click="signOut"
+            style="
+              cursor: pointer;
+              text-decoration: none;
+              color: rgb(252, 78, 78;
+              background: rgb(252, 78, 78, 0.2);
+              border-radius: 8px;
+              padding-inline: 16px;
+              padding-block: 8px;
+              width: fit-content;
+            "
+          >
+            Sign out
+          </div>
         </ul>
-         <div v-if="user" :class="{ 'mobile-user-menu': mobile }" @click="toggleProfileMenu" class="profile" ref="profile">
+        <!-- <div
+          v-if="user"
+          :class="{ 'mobile-user-menu': mobile }"
+          @click="toggleProfileMenu"
+          class="profile"
+          ref="profile"
+        >
           <span>{{ this.$store.state.profileInitials }}</span>
           <div v-show="profileMenu" class="profile-menu">
             <div class="info">
               <p class="initials">{{ this.$store.state.profileInitials }}</p>
               <div class="right">
-                <p>{{ this.$store.state.profileFirstName }} {{ this.$store.state.profileLastName }}</p>
+                <p>
+                  {{ this.$store.state.profileFirstName }}
+                  {{ this.$store.state.profileLastName }}
+                </p>
                 <p>{{ this.$store.state.profileUsername }}</p>
                 <p>{{ this.$store.state.profileEmail }}</p>
               </div>
@@ -45,14 +72,14 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </nav>
     <menuIcon @click="toggleMobileNav" class="menu-icon" v-show="mobile" />
     <transition name="mobile-nav">
       <ul class="mobile-nav" v-show="mobileNav">
         <router-link class="link" :to="{ name: 'Home' }">Home</router-link>
-        <router-link class="link" :to="{ name: 'Blogs' }">Blogs</router-link>
+        <router-link class="link" :to="{ name: 'Blogs' }">Patients</router-link>
         <router-link class="link" to="#">Create Post</router-link>
         <router-link class="link" :to="{ name: 'Login' }"
           >Login/Register</router-link
@@ -126,15 +153,13 @@ export default {
 
 <style lang="scss" scoped>
 header {
-  background-color: #fff;
-  padding: 0 25px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding: 0 54px;
+  // box-shadow: -8px -4px 32px rgba(100, 100, 100, 0.1);
   z-index: 99;
   .link {
     font-weight: 500;
     padding: 0 8px;
-    transition: 0.3s color ease;
+    transition: 0.3ms color ease;
     &:hover {
       color: #1eb8b8;
     }
@@ -160,6 +185,8 @@ header {
       justify-content: flex-end;
       ul {
         margin-right: 32px;
+        display: flex;
+        align-items: center;
         .link {
           margin-right: 32px;
         }
@@ -271,7 +298,7 @@ header {
   }
   .mobile-nav-enter-active,
   .mobile-nav-leave-active {
-    transition: all 1s ease;
+    transition: all 300ms ease;
   }
   .mobile-nav-enter {
     transform: translateX(-250px);

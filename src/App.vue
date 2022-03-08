@@ -4,7 +4,7 @@
       <div id="app">
         <Navigation v-if="!navigation" />
         <router-view />
-        <Footer v-if="!navigation" />
+        <!-- <Footer v-if="!navigation" /> -->
       </div>
     </transition>
   </div>
@@ -25,7 +25,7 @@ export default {
     };
   },
   created() {
-	    firebase.auth().onAuthStateChanged((user) => {
+    firebase.auth().onAuthStateChanged((user) => {
       this.$store.commit("updateUser", user);
       if (user) {
         this.$store.dispatch("getCurrentUser", user);
@@ -35,7 +35,6 @@ export default {
   },
   mounted() {
     this.pageLoad = true;
-   console.log(firebase.auth().currentUser);
   },
   methods: {
     checkRoute() {
@@ -59,17 +58,27 @@ export default {
 </script>
 
 <style lang="scss">
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Quicksand", sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  background: #fff;
+  background-image: url("./assets/Pattern.png");
+}
+
+.note {
+  transition: 300ms ease;
+  &:hover {
+    transform: scale(0.95);
+    cursor: pointer;
+  }
 }
 .view-leave-active {
   transition: opacity 0.5s ease-in-out, transform 0.5s ease;
@@ -161,7 +170,7 @@ button,
 .error {
   text-align: center;
   font-size: 12px;
-  color: red;
+  color: #ff0000;
 }
 .blog-card-wrap {
   position: relative;

@@ -7,7 +7,7 @@
           >Login</router-link
         >
       </p>
-      <h2>Create your FireBlog Account</h2>
+      <h2>Create your Mom Account</h2>
       <div class="inputs">
         <div class="input">
           <input type="text" placeholder="FirstName" v-model="firstName" />
@@ -34,7 +34,17 @@
       <button @click.prevent="register">Sign Up</button>
       <div class="angle"></div>
     </form>
-    <div class="background"></div>
+    <div class="background" style="overflow: hidden">
+      <lottie-player
+        v-show="!this.login"
+        autoplay
+        loop
+        mode="normal"
+        src="https://assets8.lottiefiles.com/temp/lf20_H212Xx.json"
+        style="transform: scale(1.8)"
+      >
+      </lottie-player>
+    </div>
   </div>
 </template>
 
@@ -45,6 +55,8 @@ import user from "../assets/Icons/user-alt-light.svg";
 import firebase from "firebase/app";
 import "firebase/auth";
 import db from "../firebase/firebaseInit";
+import "@lottiefiles/lottie-player";
+
 export default {
   name: "register",
   data() {
