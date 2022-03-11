@@ -539,8 +539,8 @@ export default {
 
   async mounted() {
     this.loaded = false;
-    setInterval(() => {
-      await axios
+    await setInterval(() => {
+      axios
         .post("https://admin.ph-sendsms.online/api/getLatestData", {
           devId: 101,
         })
@@ -549,7 +549,7 @@ export default {
           console.log((this.data = response.data.reading));
           console.log((this.currentDate = this.data.updated_at));
         });
-      await axios
+      axios
         .get("https://admin.ph-sendsms.online/api/getAllOximeter", {
           devId: 101,
         })
