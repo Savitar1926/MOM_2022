@@ -540,7 +540,6 @@ export default {
   async mounted() {
     this.loaded = false;
     setInterval(() => {
-      axios;
       await axios
         .post("https://admin.ph-sendsms.online/api/getLatestData", {
           devId: 101,
