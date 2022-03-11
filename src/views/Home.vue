@@ -539,22 +539,25 @@ export default {
 
   async mounted() {
     this.loaded = false;
-    await axios
-      .post("https://admin.ph-sendsms.online/api/getLatestData", {
-        devId: 101,
-      })
-      .then((response) => {
-        console.log(this.state);
-        console.log((this.data = response.data.reading));
-        console.log((this.currentDate = this.data.updated_at));
-      });
-    await axios
-      .get("https://admin.ph-sendsms.online/api/getAllOximeter", {
-        devId: 101,
-      })
-      .then((response) => {
-        console.log(response.data);
-      });
+    setInterval(() => {
+      axios;
+      await axios
+        .post("https://admin.ph-sendsms.online/api/getLatestData", {
+          devId: 101,
+        })
+        .then((response) => {
+          console.log(this.state);
+          console.log((this.data = response.data.reading));
+          console.log((this.currentDate = this.data.updated_at));
+        });
+      await axios
+        .get("https://admin.ph-sendsms.online/api/getAllOximeter", {
+          devId: 101,
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    }, 1000);
   },
   methods: {
     deleteNote(id) {
